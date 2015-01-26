@@ -1,0 +1,35 @@
+'name': 'ChordPro'
+'scopeName': 'source.cpm'
+'fileTypes': [
+  'chordpro',
+  'chopro',
+  'pro',
+  'cpm'
+]
+'patterns': [
+  {
+    'begin': '^{(t|title):\\s*'
+    'end': '\\s*}$'
+    'name': 'title.cpm'
+  }
+  {
+    'begin': '^{(st|subtitle):\\s*'
+    'end': '\\s*}$'
+    'name': 'subtitle.cpm'
+  }
+  {
+    'begin': '^{(c|comment):\\s*'
+    'end': '\\s*}$'
+    'name': 'comment.cpm'
+  }
+  {
+    'begin': '^{(ci|comment_italic):\\s*'
+    'end': '\\s*}$'
+    'name': 'comment-italic.cpm'
+  }
+  {
+    'begin': '^{(soc|start_of_chorus)}(\n)*'
+    'end': '(\n)*{(eoc|end_of_chorus)}$'
+    'name': 'chorus.cpm'
+  }
+]

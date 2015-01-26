@@ -1,0 +1,12 @@
+{
+  "name": "language-cpm",
+  "version": "0.1.0",
+  "description": "Adds snippets to Chordpro files in Atom.",
+  "repository": "https://github.com/pkordel/language-cpm",
+  "license": "MIT",
+  "engines": {
+    "atom": "*"
+  },
+  "dependencies": {
+  }
+}

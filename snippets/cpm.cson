@@ -1,0 +1,30 @@
+'.source.cpm':
+  'title':
+    'prefix': 't'
+    'body': '{t:$1}$0'
+  'subtitle':
+    'prefix': 'st'
+    'body': '{st:$1}$0'
+  'comment':
+    'prefix': 'c'
+    'body': '{c:$1}$0'
+  'comment italic':
+    'prefix': 'ci'
+    'body': '{ci:$1}$0'
+  'comment chorus':
+    'prefix': 'cc'
+    'body': '{c:Chorus}$0'
+  'chorus':
+    'prefix': 'chorus'
+    'body': """
+      {soc}
+      $1
+      {eoc}
+    """
+  'tab':
+    'prefix': 'tab'
+    'body': """
+      {sot}
+      $1
+      {eot}
+    """
