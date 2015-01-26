@@ -1,4 +1,4 @@
-describe "ChorpPro grammar", ->
+describe "ChordPro grammar", ->
   grammar = null
 
   beforeEach ->
@@ -9,7 +9,7 @@ describe "ChorpPro grammar", ->
       grammar = atom.grammars.grammarForScopeName("source.cpm")
 
   it "parses the grammar", ->
-    expect(grammar).toBeDefined()
+    expect(grammar).toBeTruthy()
     expect(grammar.scopeName).toBe "source.cpm"
 
   it "tokenizes spaces", ->
@@ -95,3 +95,35 @@ describe "ChorpPro grammar", ->
     expect(tokens[0]).toEqual value: "{start_of_chorus}", scopes: ["source.cpm", "chorus.cpm"]
     expect(tokens[1]).toEqual value: "foo", scopes: ["source.cpm", "chorus.cpm"]
     expect(tokens[2]).toEqual value: "{end_of_chorus}",   scopes: ["source.cpm", "chorus.cpm"]
+
+  it "tokenizes a tab section", ->
+    {tokens} = grammar.tokenizeLine("{sot}foo{eot}")
+    expect(tokens[0]).toEqual value: "{sot}", scopes: ["source.cpm", "tab.cpm"]
+    expect(tokens[1]).toEqual value: "foo", scopes: ["source.cpm", "tab.cpm"]
+    expect(tokens[2]).toEqual value: "{eot}",   scopes: ["source.cpm", "tab.cpm"]
+
+    {tokens} = grammar.tokenizeLine("{sot}\nfoo\n{eot}")
+    expect(tokens[0]).toEqual value: "{sot}\n", scopes: ["source.cpm", "tab.cpm"]
+    expect(tokens[1]).toEqual value: "foo", scopes: ["source.cpm", "tab.cpm"]
+    expect(tokens[2]).toEqual value: "\n{eot}",   scopes: ["source.cpm", "tab.cpm"]
+
+    {tokens} = grammar.tokenizeLine("{start_of_tab}foo{end_of_tab}")
+    expect(tokens[0]).toEqual value: "{start_of_tab}", scopes: ["source.cpm", "tab.cpm"]
+    expect(tokens[1]).toEqual value: "foo", scopes: ["source.cpm", "tab.cpm"]
+    expect(tokens[2]).toEqual value: "{end_of_tab}",   scopes: ["source.cpm", "tab.cpm"]
+
+  it "tokenizes key", ->
+    {tokens} = grammar.tokenizeLine("{k:foo}")
+    expect(tokens[0]).toEqual value: "{k:", scopes: ["source.cpm", "key.cpm"]
+    expect(tokens[1]).toEqual value: "foo", scopes: ["source.cpm", "key.cpm"]
+    expect(tokens[2]).toEqual value: "}",   scopes: ["source.cpm", "key.cpm"]
+
+    {tokens} = grammar.tokenizeLine("{k:  foo  }")
+    expect(tokens[0]).toEqual value: "{k:  ", scopes: ["source.cpm", "key.cpm"]
+    expect(tokens[1]).toEqual value: "foo", scopes: ["source.cpm", "key.cpm"]
+    expect(tokens[2]).toEqual value: "  }",   scopes: ["source.cpm", "key.cpm"]
+
+    {tokens} = grammar.tokenizeLine("{key:foo}")
+    expect(tokens[0]).toEqual value: "{key:", scopes: ["source.cpm", "key.cpm"]
+    expect(tokens[1]).toEqual value: "foo", scopes: ["source.cpm", "key.cpm"]
+    expect(tokens[2]).toEqual value: "}",   scopes: ["source.cpm", "key.cpm"]

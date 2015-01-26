@@ -8,6 +8,9 @@
   'comment':
     'prefix': 'c'
     'body': '{c:$1}$0'
+  'key':
+    'prefix': 'key'
+    'body': '{key:$1}$0'
   'comment italic':
     'prefix': 'ci'
     'body': '{ci:$1}$0'

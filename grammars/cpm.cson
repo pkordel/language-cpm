@@ -32,4 +32,14 @@
     'end': '(\n)*{(eoc|end_of_chorus)}$'
     'name': 'chorus.cpm'
   }
+  {
+    'begin': '^{(sot|start_of_tab)}(\n)*'
+    'end': '(\n)*{(eot|end_of_tab)}$'
+    'name': 'tab.cpm'
+  }
+  {
+    'begin': '^{(k|key):\\s*'
+    'end': '\\s*}$'
+    'name': 'key.cpm'
+  }
 ]
